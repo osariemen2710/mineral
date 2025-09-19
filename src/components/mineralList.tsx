@@ -9,6 +9,10 @@ import pyriteJpg from '../assets/pyrite.jpg';
 import micaJpg from '../assets/mica.jpg';
 import lithiumJpg from '../assets/lithium.jpg';
 import coalJpg from '../assets/coal.jpg';
+import copperJpg from '../assets/copper.jpg';
+import ironJpg from '../assets/iron.jpg';
+import clayJpg from '../assets/clay.jpg';
+import diamondJpg from '../assets/diamond.jpg';
 
 interface Mineral {
   id: string;
@@ -230,6 +234,107 @@ const mineralData: Mineral[] = [
     rarity: 'common',
     funFact: 'Coal formed from ancient forests that existed 300 million years ago - you\'re literally looking at prehistoric plants!',
     difficulty: 1
+  },
+  {
+    id: 'copper',
+    name: 'Copper',
+    image: copperJpg,
+    properties: [
+      'Hardness: 2.5-3 (Mohs)',
+      'Luster: Metallic',
+      'Streak: Reddish-orange',
+      'Crystal System: Isometric'
+    ],
+    chemicalComposition: 'Cu',
+    uses: [
+      'Electrical wiring',
+      'Plumbing and construction',
+      'Alloys (brass, bronze)',
+      'Coinage'
+    ],
+    commonRocks: [
+      'Porphyry copper deposits',
+      'Sedimentary rocks (shales, sandstones)',
+      'Volcanic rocks (basalt)'
+    ],
+    rarity: 'uncommon',
+    funFact: 'The Statue of Liberty is covered in over 80 tons of copper, which has weathered to its iconic green color.',
+    difficulty: 2
+  },
+  {
+    id: 'iron',
+    name: 'Iron',
+    image: ironJpg,
+    properties: [
+      'Hardness: 4-5 (Mohs)',
+      'Luster: Metallic',
+      'Streak: Grayish-black',
+      'Crystal System: Isometric'
+    ],
+    chemicalComposition: 'Fe',
+    uses: [
+      'Steel production',
+      'Magnets',
+      'Catalysts',
+      'Dietary supplements'
+    ],
+    commonRocks: [
+      'Banded iron formations (BIFs)',
+      'Igneous rocks'
+    ],
+    rarity: 'common',
+    funFact: 'Our blood is red due to the interaction between iron and oxygen in hemoglobin.',
+    difficulty: 1
+  },
+  {
+    id: 'clay',
+    name: 'Clay',
+    image: clayJpg,
+    properties: [
+      'Hardness: 1-2 (Mohs)',
+      'Luster: Dull',
+      'Streak: White to gray',
+      'Note: Clay is a group of minerals, not a single mineral.'
+    ],
+    chemicalComposition: 'Hydrous aluminum phyllosilicates',
+    uses: [
+      'Bricks, cement, and tiles',
+      'Ceramics and pottery',
+      'Drilling muds',
+      'Paper manufacturing'
+    ],
+    commonRocks: [
+      'Shale, mudstone, and siltstone',
+      'Slate and phyllite'
+    ],
+    rarity: 'common',
+    funFact: 'Clay tablets were one of the first known writing mediums, used by ancient civilizations.',
+    difficulty: 1
+  },
+  {
+    id: 'diamond',
+    name: 'Diamond',
+    image: diamondJpg,
+    properties: [
+      'Hardness: 10 (Mohs)',
+      'Luster: Adamantine',
+      'Streak: White',
+      'Crystal System: Isometric'
+    ],
+    chemicalComposition: 'C',
+    uses: [
+      'Jewelry',
+      'Cutting, grinding, and drilling tools',
+      'Electronics (heat sinks)',
+      'Medical field (surgical tools)'
+    ],
+    commonRocks: [
+      'Kimberlite',
+      'Lamproite'
+    ],
+    rarity: 'rare',
+    funFact: 'Scientists have discovered a star that is essentially a giant diamond, nicknamed "Lucy".',
+    difficulty: 5
   }
 ];
 
@@ -285,12 +390,12 @@ const MineralList: React.FC = () => {
           <div className="text-center mb-12">
             <div className="flex items-center justify-center mb-6">
               <Sparkles className="w-12 h-12 text-purple-600 mr-4 animate-pulse" />
-              <h1 className="text-6xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
+              <h1 className="text-4xl sm:text-6xl font-bold bg-gradient-to-r from-purple-600 to-pink-600 bg-clip-text text-transparent">
                 Mineral Explorer
               </h1>
               <Sparkles className="w-12 h-12 text-pink-600 ml-4 animate-pulse" />
             </div>
-            <p className="text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
+            <p className="text-lg sm:text-xl text-gray-700 max-w-3xl mx-auto leading-relaxed">
               Embark on an epic journey through Earth's geological treasures! Discover, learn, and collect minerals 
               from around the world. Each discovery brings you closer to becoming a master mineralogist!
             </p>
@@ -416,7 +521,7 @@ const MineralList: React.FC = () => {
               <div className="flex justify-between items-start">
                 <div>
                   <div className="flex items-center gap-3 mb-2">
-                    <h2 className="text-3xl font-bold text-black">{selectedMineral.name}</h2>
+                    <h2 className="text-2xl sm:text-3xl font-bold text-black">{selectedMineral.name}</h2>
                     <div className={`px-3 py-1 rounded-full text-sm font-medium flex items-center gap-1 ${getRarityColor(selectedMineral.rarity)}`}>
                       {getRarityIcon(selectedMineral.rarity)}
                       {selectedMineral.rarity}
@@ -433,7 +538,7 @@ const MineralList: React.FC = () => {
               </div>
 
               {/* Tabs */}
-              <div className="flex gap-1 mt-6 bg-gray-100 rounded-lg p-1">
+              <div className="flex flex-wrap gap-1 mt-6 bg-gray-100 rounded-lg p-1">
                 {[ 
                   { id: 'overview', label: 'Overview', icon: BookOpen },
                   { id: 'properties', label: 'Properties', icon: Eye },
@@ -460,7 +565,7 @@ const MineralList: React.FC = () => {
             </div>
 
             {/* Modal Content */}
-            <div className="p-6 overflow-y-auto max-h-[60vh]">
+            <div className="p-6 overflow-y-auto max-h-[70vh] sm:max-h-[60vh]">
               {activeTab === 'overview' && (
                 <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                   <div>
@@ -471,7 +576,7 @@ const MineralList: React.FC = () => {
                     />
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold text-black hover:text-purple-500 mb-4">Quick Facts</h3>
+                    <h3 className="text-lg sm:text-xl font-bold text-black hover:text-purple-500 mb-4">Quick Facts</h3>
                     <div className="space-y-3">
                       <div className="bg-gray-100 rounded-lg p-3">
                         <h4 className="font-semibold text-black mb-1">Difficulty Level</h4>
@@ -501,7 +606,7 @@ const MineralList: React.FC = () => {
               {activeTab === 'properties' && (
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div>
-                    <h3 className="text-xl font-bold text-black hover:text-purple-500 mb-4">Physical Properties</h3>
+                    <h3 className="text-lg sm:text-xl font-bold text-black hover:text-purple-500 mb-4">Physical Properties</h3>
                     <div className="space-y-3">
                       {selectedMineral.properties.map((prop, index) => (
                         <div key={index} className="bg-gray-100 rounded-lg p-3">
@@ -511,7 +616,7 @@ const MineralList: React.FC = () => {
                     </div>
                   </div>
                   <div>
-                    <h3 className="text-xl font-bold text-black hover:text-purple-500 mb-4">Found In</h3>
+                    <h3 className="text-lg sm:text-xl font-bold text-black hover:text-purple-500 mb-4">Found In</h3>
                     <div className="space-y-3">
                       {selectedMineral.commonRocks.map((rock, index) => (
                         <div key={index} className="bg-gray-100 rounded-lg p-3">
@@ -525,7 +630,7 @@ const MineralList: React.FC = () => {
 
               {activeTab === 'uses' && (
                 <div>
-                  <h3 className="text-xl font-bold text-black hover:text-purple-500 mb-4">Applications & Uses</h3>
+                  <h3 className="text-lg sm:text-xl font-bold text-black hover:text-purple-500 mb-4">Applications & Uses</h3>
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
                     {selectedMineral.uses.map((use, index) => (
                       <div key={index} className="bg-purple-50 rounded-lg p-4 border border-purple-200">
