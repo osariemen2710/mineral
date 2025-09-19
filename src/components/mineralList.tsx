@@ -238,7 +238,6 @@ const MineralList: React.FC = () => {
   const [searchTerm, setSearchTerm] = useState('');
   const [discoveredMinerals, setDiscoveredMinerals] = useState<Set<string>>(new Set());
   const [filterRarity, setFilterRarity] = useState<'all' | 'common' | 'uncommon' | 'rare'>('all');
-  const [showStats, setShowStats] = useState(false);
   const [activeTab, setActiveTab] = useState<'overview' | 'properties' | 'uses' | 'fun'>('overview');
 
   const filteredMinerals = mineralData.filter(mineral => {
